@@ -6,13 +6,13 @@ tags: [Algorithm, Sort]
 ---
 ### **Step1: Where is the quick sort from?**
 
-In a out-of-order list, if we fixed one of them and name it "pivot", such as the middle one or the first one, then we divided the list into two parts(left and right). We put the one bigger than privot in the left part, put the one smaller than pivot in the right part. Repeat the process, we can finally get the sorted list.
+In a out-of-order array, if we fixed one of them and name it "pivot", such as the middle one or the first one, and next we divided the array into two parts(left and right). We put the one bigger than privot in the left part, put the one smaller than pivot in the right part. Repeat the process, we can finally get the sorted array.
 
 ### **Step2: What can we achieve it with c++?**
 
-- **First**, we need the "pivot". Generally speaking, we often define the first one or the middle one of the list as pivot. And we should divide the list into two parts. That means that we need two pointers, which point the last first one and the last one.
+- **First**, we need the "pivot". Generally speaking, we often define the first one or the middle one of the array as pivot. And we should divide the array into two parts. That means that we need two pointers, which point the last first one and the last one.
 
-> **(Attention, there are some difference of setting pointers between defining the first one and the middle one of the list as pivot)**
+> **(Attention, there are some difference of setting pointers between defining the first one and the middle one of the array as pivot)**
 
 For the **first one**:
 
@@ -24,10 +24,9 @@ The 'l' point the first index of the element of the array.
 The 'h' point the index after the last element of the array.
 */
 int pivot = arr[i];
-
+```
 
 For the **middle one**:
-```
 
 ```c++
 int i = l; int j = h;
