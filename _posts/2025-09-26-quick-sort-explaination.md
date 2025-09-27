@@ -27,6 +27,7 @@ int pivot = arr[i];
 
 
 For the **middle one**:
+```
 
 ```c++
 int i = l; int j = h;
@@ -46,8 +47,8 @@ while(i < j)
  do{
      ++i;
     }while(arr[i] > privot);
-    do{
-        --j;
+ do{
+     --j;
     }while(arr[j] < privot);
 }
 if(i < j)
