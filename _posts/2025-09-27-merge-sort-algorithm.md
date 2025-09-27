@@ -1,8 +1,9 @@
 ---
 layout: post
-title: Merge sort algorithm
+title: Merge Sort Algorithm
 date: 2025-09-27 06:36 +0000
-tags: [Algorithm, Sort]
+categories: [Algorithm, Sort]
+tags: [Merge_Sort]
 ---
 ### **Step1: What is merge?**
 

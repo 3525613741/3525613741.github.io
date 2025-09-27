@@ -1,8 +1,9 @@
 ---
 layout: post
-title: Quick Sort Explaination
+title: Quick Sort Algorithm
 date: 2025-09-26 07:10 +0000
-tags: [Algorithm, Sort]
+categories: [Algorithm, Sort]
+tags: [Quick_Sort]
 ---
 ### **Step1: Where is the quick sort from?**
 
