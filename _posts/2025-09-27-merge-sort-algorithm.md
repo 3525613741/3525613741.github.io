@@ -51,47 +51,48 @@ void merge_sort(int start, int end,vector<int>& arr, vector<int>& temp)
 **Third**, the whole code:
 
 ```c++
-//this adapt to n arrays more
 #include <iostream>
-#include <vector>
 #include <algorithm>
+#include <vector>
 using namespace std;
-void merge(int start, int mid, int end, vector<int>& index, vector<int>& temp)
-{
-    int i = start; int j = mid + 1; int k = 0;
-    while(i < mid + 1 && j < end + 1)
-    {
-        if(index[i] > index[j]) temp[k++] = index[j++];
-        else temp[k++] = index[i++];
+class MyVector{
+public:
+    vector<int> arr;
+    MyVector(initializer_list<int> init) : arr(init){}
+    void merge_sort(){
+        if(arr.empty()) return;
+        vector<int> temp(arr.size());
+        ms(0, arr.size() - 1, temp);
     }
-    while(i < mid + 1) temp[k++] = index[i++];/
-    while(j < end + 1) temp[k++] = index[j++]; 
-    for(i = start; i <= end; ++i) index[i] = temp[i - start];
-}
-void merge_sort(int start, int end, vector<int>& index, vector<int>& temp)
-{
-    if(start < end)
-    {
-        int mid = start + (end - start) / 2;
-        merge_sort(start, mid, index, temp);
-        merge_sort(mid + 1, end, index, temp);
-        merge(start, mid, end, index, temp);
+    
+    void push(int value){
+        arr.push_back(value);
     }
-}
-int main(void)
-{
-    vector<int>arr;
-    int times = 0; cin >> times;
-    for(int i = 0; i < times; ++i)
+private:   
+    void merge(int start, int mid, int end, vector<int>& temp)
     {
-        int a = 0; cin >> a;
-        arr.push_back(a);
+        int i = start; int j = mid + 1; int k = 0; // start to mid is left, mid to end is right
+        while(i < mid + 1 && j < end + 1) // j = end + 1, because the size of an array minus one is the end of the array.
+        {
+            if(arr[i] < arr[j]) temp[k++] = arr[i++];
+            else temp[k++] = arr[j++];
+        }
+        while(i < mid + 1) temp[k++] = arr[i++];
+        while(j < end + 1) temp[k++] = arr[j++];
+        for(i = start; i < end + 1; ++i) arr[i] = temp[i - start];
     }
-    vector<int>temp(arr.size());
-    merge_sort(0, arr.size() - 1, arr, temp);
-    for(int i = 0; i < arr.size(); ++i) cout << arr[i] << ' ';
-    cout << endl;
-}
+    void ms(int start, int end, vector<int>& temp)
+    {
+        if(start < end)
+        {
+            int mid = start + (end - start) / 2;
+            ms(start, mid, temp);
+            ms(mid + 1, end, temp);
+            merge(start, mid, end, temp);
+        }
+    } 
+};
+
 ```
 
 ### How about the time complexity?

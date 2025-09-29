@@ -92,7 +92,7 @@ class Heap_Sort{
     void heap_sort(vector<int>& arr)
     {
         int len = arr.size();
-        for(int i = len / 2 - 1; i > 0; --i) max_heapify(i, len, arr);// Initail maintain from the bottom, and obtain the maximum numbers, at the same time ensuring that the second largest number is on the second level, the third largest number is on the third level, and so on.
+        for(int i = len / 2 - 1; i >= 0; --i) max_heapify(i, len, arr);// Initail maintain from the bottom, and obtain the maximum numbers, at the same time ensuring that the second largest number is on the second level, the third largest number is on the third level, and so on.
         for(int i = len - 1; i >= 0; --i)// After that, we continue to maintain it from top, ensuring that the parent value is greater than the child value at each level.
         {
             swap(arr[0], arr[i]);
