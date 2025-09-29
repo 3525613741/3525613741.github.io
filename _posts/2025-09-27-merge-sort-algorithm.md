@@ -21,7 +21,7 @@ If there is an array, such as [9, 4, 5, 1, 2, 6, 7], we can consider each number
 void merge(int start, int mid, int end, vector<int>& arr, vector<int>& temp)
     {
         int i = start; int j = mid + 1; int k = 0; // start to mid is left, mid to end is right
-        while(i < mid + 1 && j < end + 1) // j = end + 1, because we consider the size of an array minus one as the end by default
+        while(i < mid + 1 && j < end + 1) // j = end + 1, because the size of an array minus one is the end of the array.
         {
             if(arr[i] < arr[j]) temp[k++] = arr[i++];
             else temp[k++] = arr[j++];
