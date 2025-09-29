@@ -7,7 +7,7 @@ tags: [Insertion_Sort]
 ---
 ### **What is Insertion?**
 
-Insertion sort is a simple sort algorithm. The basic logic of is that from the begin to the end of the array, if the previous one is larger than the next one, swap them, achieving the insertion effct.
+Insertion sort is a simple sort algorithm. The basic logic of is that from the head to the tail of the array, if the previous one is larger than the next one, swap them and loop the process, achieving the insertion effct.
 
 ### **Implement by code**
 
