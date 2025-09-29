@@ -95,4 +95,3 @@ int main(void)
 ```
 
 ### How about the time complexity?
-- A:
