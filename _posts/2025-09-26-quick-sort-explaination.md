@@ -115,3 +115,10 @@ public:
 
 - **Q**: Why is it quick?
 - **A**: Analyzing the time complexity:
+In the partition, for an array with n elements, $\mathcal{O}(n)$ operations are performed each time, because the two pointers will move and the element will compare and swap once at most. So, we just analyze the recursion.
+
+**Worst:** Selecting the biggest or smallest number as pivot every time, which means the j + 1 will equal to l or j will equal to h, the recursion depth will be n. In this case, the time complexity is $\mathcal{O}(n ^ 2)$.
+
+**Best:** Every time the quick_sort function will split the array in half, which means the recursion depth is $\log_2 n$ -> $O(\log n)$. The time complexity is $O(n \log n)$.  
+
+**Average:** Selecting the suitable pivot, the recursion depth will approximately equal to $O(\log n)$. The time complexity is $O(n \log n)$.

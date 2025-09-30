@@ -27,3 +27,9 @@ void is(vector<int>& arr)
 ```
 
 ### **Time Complexity**
+
+**Worst:** Every element need to swap to the head(reverse array). According to the arithmetic sequence sum formula, it equals to $\mathcal{O}(n ^ 2)$.
+
+**Best:** Ascending array, it equals to $\mathcal{O}(n)$
+
+**Average:** Random and unsorted array. Assuming the ith element, it can swap 1, 2, 3, ... i. So the average of swapping times is $\frac{\sum_{k=1}^{i} k}{i}$, equals to $\frac{i+1}{2}$. So from head to tail, it is $\sum_{i=1}^{n} \frac{i+1}{2}$. According to the arithmetic sequence sum formula, it equals to $\mathcal{O}(n ^ 2)$.

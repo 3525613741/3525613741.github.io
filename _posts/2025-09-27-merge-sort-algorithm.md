@@ -96,3 +96,5 @@ private:
 ```
 
 ### How about the time complexity?
+
+Because the recursion will split the array in half, the recursion depth is $\log_2 n$ -> $O(\log n)$. The merge operation will do $\mathcal{O}(n)$ operations, no matter the best, the worst or average. So the time complexity is $O(n \log n)$.
