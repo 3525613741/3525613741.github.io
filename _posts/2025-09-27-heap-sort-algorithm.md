@@ -104,4 +104,4 @@ class Heap_Sort{
 
 ### **Time complexity**
 
-The heap is the Binary Tree, whose height is $\log_2 n$ -> O($\log n$). In every level(in addition to the root), we need to compare and swap $O(1)$ times. And we need to call max heapify n times to exclude the max element. So the time complexity is $O(n \log n)$, no matter the best, the worst, and the average.
+The heap is the Binary Tree, whose height is $\log_2 n$ -> O($\log n$). In every level, we need to compare and swap $O(1)$ times. And we need to call max heapify n times to exclude the max element. So the time complexity is $O(n \log n)$, no matter the best, the worst, and the average.
