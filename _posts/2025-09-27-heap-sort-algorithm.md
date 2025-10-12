@@ -23,7 +23,7 @@ There are two types of heap: Max Heap and Min Heap. The max heap means that the 
 As we know that, we need a max heap. So the question is: How can we get the max heap? This process is max heapify. Attention: the index of the tree node start from 0, the index of root is 0.
 
 Creating an index complete binary tree:
-![alt text](/assets/images/image.png)
+![alt text](/assets/images/Binary_Tree.png)
 In the image, we find that the index of every left son equals to 2 times of its dad's index and plus 1. And in max heap, the dad's value should be greater than the value of its son(s). Along this way, we can start to swap.
 
 The specific operations are follows:
