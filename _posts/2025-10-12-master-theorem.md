@@ -52,6 +52,7 @@ $f(n)$ is balance: $ k = {\log_b a}$
 In this case we need to discuss the value of p.
 Based on $T(n) = \sum_{k=0}^{\log_b n} a^k f\left(\frac{n}{b^k}\right)$.
 We can use integration to approximate this discrete summation:
+
 $$
 T(n) = \sum_{k=0}^{\log_b n} a^k \left( \frac{n}{b^k} \right)^{\log_b a} \log^p \!\left( \frac{n}{b^k} \right)
 $$
