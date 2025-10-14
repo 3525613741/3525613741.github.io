@@ -4,6 +4,7 @@ title: Insertion sort algorithm
 date: 2025-09-29 09:56 +0000
 categories: [Algorithm, Sort]
 tags: [Insertion_Sort]
+math: true
 ---
 ### **What is Insertion?**
 

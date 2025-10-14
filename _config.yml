@@ -231,3 +231,8 @@ jekyll-archives:
   permalinks:
     tag: /tags/:name/
     category: /categories/:name/
+    
+math:
+  enable: true
+  provider: katex
+

@@ -1,9 +1,10 @@
 ---
 layout: post
-title: master theorem
+title: Master Theorem
 date: 2025-10-12 06:24 +0000
 categories: [Algorithm, Math]
-tag: [master theorem]
+tag: [master_theorem]
+math: true
 ---
 ### **What is Master Theorem?**
 

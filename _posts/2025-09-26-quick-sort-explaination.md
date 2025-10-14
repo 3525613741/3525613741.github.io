@@ -4,6 +4,7 @@ title: Quick Sort Algorithm
 date: 2025-09-26 07:10 +0000
 categories: [Algorithm, Sort]
 tags: [Quick_Sort]
+math: true
 ---
 ### **Step1: Where is the quick sort from?**
 

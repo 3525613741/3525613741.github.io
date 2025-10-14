@@ -4,6 +4,7 @@ title: Heap Sort Algorithm
 date: 2025-09-27 11:49 +0000
 categories: [Algorithm, Sort]
 tags: [Heap_Sort]
+math: true
 ---
 ### **Step1 What is heap?**
 

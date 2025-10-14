@@ -4,6 +4,7 @@ title: Merge Sort Algorithm
 date: 2025-09-27 06:36 +0000
 categories: [Algorithm, Sort]
 tags: [Merge_Sort]
+math: true
 ---
 ### **Step1: What is merge?**
 
