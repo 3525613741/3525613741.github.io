@@ -3,7 +3,7 @@ layout: post
 title: Graph Storage Methods
 date: 2025-10-14 06:46 +0000
 categories: [Algorithm, Gragh]
-tag: [Graph_storage]
+tag: [Graph storage]
 ---
 ### **Adjacency List**
 
@@ -164,4 +164,7 @@ int main(void)
 
 ### **Graph Traversal**
 
-**For graph traversal, the Adjacency Matrix follows the rules of a 2D matrix, probing cell by cell; while Adjacency Lists (including the Array-Based Adjacency List, often called Forward Star or Chain-Forward Star) traverse all outgoing edges of one vertex before moving to the next.**
+For graph traversal, the Adjacency Matrix follows the rules of a 2D matrix, probing cell by cell; while Adjacency Lists (including the Array-Based Adjacency List, often called Forward Star or Chain-Forward Star) traverse all outgoing edges of one vertex before moving to the next.
+
+- For **sparse graphs**, use an adjacency list or a Chain Forward Star.
+- For **dense graphs**, use an adjacency matrix.
