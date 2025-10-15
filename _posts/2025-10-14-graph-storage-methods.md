@@ -155,9 +155,13 @@ int main(void)
     }
     // How to use it?
     /*
-    for(int i = 1; i <= edges; ++i)
+    for(int i = 1; i <= dots; ++i)
     {
         for(int j = head[i]; j != -1; j = edge[j].next)
     }*/
 }
 ```
+
+### **Graph Traversal**
+
+**For graph traversal, the Adjacency Matrix follows the rules of a 2D matrix, probing cell by cell; while Adjacency Lists (including the Array-Based Adjacency List, often called Forward Star or Chain-Forward Star) traverse all outgoing edges of one vertex before moving to the next.**
