@@ -62,6 +62,7 @@ double myPow(ll a, ll e)
 }
 ```
 
+If we use recursion, the algorithm's logic is as follows: To compute $a^e$, we first compute $a^{e/2}$; to compute $a^{e/2}$, we first compute $a^{e/2/2}$, and so on, recursively, until the termination condition $e = 1$ is reached and a value is returned. At this point, we observe that if $e$ is an odd number, for example, $e = 9$, then $9/2 = 4$ (using integer division), and one base factor will be missing upon return. Therefore, we need to discuss odd and even numbers separately. When the exponent is even, the returned result's exponent is half of the original exponent, so the returned result must be squared. When the exponent is odd, we need to multiply the squared result by an additional base factor.
 Recursion version:
 
 ```c++
