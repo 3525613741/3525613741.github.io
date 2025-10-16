@@ -3,7 +3,7 @@ layout: post
 title: Master Theorem
 date: 2025-10-12 06:24 +0000
 categories: [Algorithm, Math]
-tag: [master_theorem]
+tag: [master_theorem, Divide and Conquer]
 math: true
 ---
 ### **What is Master Theorem?**

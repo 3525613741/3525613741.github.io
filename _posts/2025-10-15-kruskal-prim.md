@@ -113,7 +113,8 @@ int Kruskal(int n, vector<Edge>& edges)
     priority_queue<Edge, vector<Edge>, Cmp>pq;
     for(auto& e : edges) pq.push(e);
     DSU(n);
-    int count = 0; int total = 0;
+    int count = 0; // count = n - 1, all the nodes are connected, then stop.  
+    int total = 0;
     while(!pq.empty() && count < n - 1)
     {
         Edge tmp = pq.top(); pq.pop();

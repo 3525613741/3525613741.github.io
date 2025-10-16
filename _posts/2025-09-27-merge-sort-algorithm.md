@@ -3,7 +3,7 @@ layout: post
 title: Merge Sort Algorithm
 date: 2025-09-27 06:36 +0000
 categories: [Algorithm, Sort]
-tags: [Merge_Sort]
+tags: [Merge_Sort, Divide and Conquer]
 math: true
 ---
 ### **Step1: What is merge?**
