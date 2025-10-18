@@ -4,6 +4,7 @@ title: Kruskal & Prim
 date: 2025-10-15 04:56 +0000
 categoried: [Algorithm, Graph]
 tag: [MST, Kruskal, Prim]
+math: true
 ---
 
 ### **What is MST?**

@@ -4,6 +4,7 @@ title: Binary Exponentiation
 date: 2025-10-16 01:38 +0000
 categories: [Algorithm, Optimization]
 tag: [Binary Exponentiation, Bit Operation, Divide and Conquer]
+math: true
 ---
 
 ### **What is Binary Exponentiation**

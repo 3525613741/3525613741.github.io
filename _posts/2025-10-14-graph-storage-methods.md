@@ -4,6 +4,7 @@ title: Graph Storage Methods
 date: 2025-10-14 06:46 +0000
 categories: [Algorithm, Gragh]
 tag: [Graph storage]
+math: true
 ---
 ### **Adjacency List**
 

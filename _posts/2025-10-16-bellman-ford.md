@@ -4,6 +4,7 @@ title: Bellman Ford
 date: 2025-10-16 12:24 +0000
 categories: [Algorithm, Graph]
 tag: [Single Source Shortest Path, Bellman Ford]
+math: true
 ---
 
 ### **What is Bellman Ford**

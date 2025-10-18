@@ -4,6 +4,7 @@ title: Matrix Multiplication approach for All-Pairs Shortest Paths
 date: 2025-10-18 06:18 +0000
 catogries: [Algorithm, Graph]
 tag: [APSP, Matrix]
+math: true
 ---
 ### **How does it work?**
 
