@@ -24,7 +24,7 @@ Suppose a integer 'a'.
 
 ### **The logic**
 
-Focus on the exponent. If we express the exponent in binary, for example, $2^{13}$, $13 = (1101)_2$, $13 = 2^{0} + 2^{4} + 2^{8}$. From the prerequisites, we can use *a & 1* to check for parity, and use *a >> 1* to get every binary bit. Using both of them, we can check if the current binary bit is a 1 or a 0.
+Focus on the exponent. If we express the exponent in binary, for example, $2^{13}$, $13 = (1101)_2$, so $2^{13} = 2^{1} \cdot 2^{4} \cdot 2^{8}$. From the prerequisites, we can use *a & 1* to check for parity, and use *a >> 1* to get every binary bit. Using both of them, we can check if the current binary bit is a 1 or a 0.
 
 Focus on the base and set a container = 1. If the current binary bit is 1, then container ✖️ base to maintain this container and base ✖️ base to maintain the base; If the current binary bit is 0, just maintain the base.
 Repeat this process through *a >> 1*.
