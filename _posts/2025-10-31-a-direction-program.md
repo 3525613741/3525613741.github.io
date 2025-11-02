@@ -1202,17 +1202,17 @@ function showMessage(message) {
 
 ```json
 {
-    "name": "parking-finder-backend", // 为后端服务起一个名字
-    "version": "1.0.0", //第一个版本
-    "main": "server.js", // 定义了项目启动时Node.js应该执行的主文件
-    "scripts": { //定义快捷指令 
-        "start": "node server.js", //用npm start代替npm node server.js 快捷启动
-        "dev": "nodemon server.js" // 用于开发环境 实现修改代码后的自动重启 方便观察调整
+    "name": "parking-finder-backend", 
+    "version": "1.0.0",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js",
+        "dev": "nodemon server.js"
     },
-    "keywords": ["parking", "location", "map"], // 描述项目核心主题
-    "author": "Xiao Jinping", //作者
-    "license": "MIT", //许可证
-    "dependencies": { //描述依赖，当terminal中输入npm install后即刻安装所需依赖
+    "keywords": ["parking", "location", "map"],
+    "author": "Xiao Jinping",
+    "license": "MIT", 
+    "dependencies": { 
         "express": "^4.18.2"
     },
     "devDendencies": {
