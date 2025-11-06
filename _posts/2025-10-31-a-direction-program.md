@@ -139,7 +139,7 @@ function generateVehicles() {
         const baseLot = parkingLots[Math.floor(Math.random() * parkingLots.length)]; // 每次随机选取一个停车点，floor()向下取整和random()生成[0,1)的数，使选取每个停车点的机会相等
         const offsetLat = (Math.random() - 0.5) * 0.0004;//设置纬度偏移量，范围[-0.0002, 0.0002);
         const offsetLng = (Math.random() - 0.5) * 0.0004;//设置经度偏移量，范围[-0.0002, 0,0002);
-        vehicle.push({
+        vehicles.push({
             id: `${prefixes[Math.floor(Math.random() * prefixes.length)]}${String(i + 1).padStart(3, '0')}`,// 随机等机会取字母编号，设置1 - 300的编号，并将编号转换为字符串，padStart让长度不足3的字符串的用字符‘0’补齐前位
             lat: baseLot.lat + offsetLat, // offsetLat的取值范围保证了车辆能在停车点中心点的南北向随机分布
             lng: baseLot.lng + offsetLng, // offsetLng的取值范围保证了车辆在停车点中心点的东西向随机分布
@@ -169,7 +169,7 @@ function calculateDistance(lat1, lat2, lng1, lng2) {
     const R = 6371000; //地球半径
     const dLat = (lat2 - lat1) * Math.PI / 180;
     const dLng = (lng2 - lng1) * Math.PI / 180; //转换为弧度制
-    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.Pi / 180) * Math.sin(dLng / 2) * Math.sin(dLng / 2);
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLng / 2) * Math.sin(dLng / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
 }
@@ -313,7 +313,7 @@ app.listen(PORT, () => {
 
 <head>
     <meta charset="UTF-8"> <!--使用UTF-8标准编码-->
-    <meta name="viewport" content ="width=device-width, initial-scale=1.0"> <!--声明按照实际设备宽度视口（浏览器窗口）渲染网页，阻止默认缩小，并设置初始缩放比例为1.0，防止在一些浏览器上进行不确定的缩放。同时content ="width=device-width还确保@media响应式设计能够触发-->
+    <meta name="viewport" content ="width=device-width, initial-scale=1.0"> <!--声明按照实际设备宽度视口（浏览器窗口）渲染网页，阻止默认缩小，并设置初始缩放比例为1.0，防止在一些浏览器上进行不确定的缩放。同时content ="width=device-width"还确保@media响应式设计能够触发-->
     <title>地图找车</title>
     <link rel="stylesheet" href="sytle.css"> <!--链接css-->
     <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=pmEiHxWExMjQk9E3VlaYOy4Zl11N8fF5"></script><!--指定脚本类型为javascript，加载百度地图官方提供的服务接口-->
@@ -329,13 +329,13 @@ app.listen(PORT, () => {
 
     <div class="mapContainer" style="display: none;" id="mapContainer"><!--header按钮呼出地图，于是需要设置地图容器来承载地图。由于反复加载地图太慢，于是默认将其隐藏，使其能够实时加载，后续只用使用js取消隐藏即可-->
         <div class="mapHeader">
-            <button class="closeMapBtn" id="closeMapBtn">x<button>
+            <button class="closeMapBtn" id="closeMapBtn">x</button>
             <h3>停车点地图导航</h3><!--将map header设置为第三级标题，大小合适-->
         </div>
         <div class="baiduMap" id="baiduMap"></div><!--在js接入百度地图并显示在这-->
     </div>
 
-    <div class="contentContainer" id="parkingContain"><!--用于承载主页面元素 将在后续用js从后端获取数据后添加-->
+    <div class="contentContainer" id="parkingContainer"><!--用于承载主页面元素 将在后续用js从后端获取数据后添加-->
         <div class="loading">加载中...</div><!--防止主页面未加载出来被用户认为卡住-->
     </div>
 
@@ -390,8 +390,8 @@ body {
     font-size: 1.2rem;/*根元素<html>的字体大小有默认值，1.2rem就是默认值的1.2倍。有几个好处：在进行响应式设计的时候只需要在Media Query里面更改<html>默认字体大小就可以完成缩放操作, 并且当用户更改浏览器字体默认大小时，其也能按比例自动缩放*/
     font-weight: bold;/*设置粗体*/
     background-color: rgba(198, 26, 26, 0.8);/*rgba中的a是透明度*/
-    color: rgba:(255, 255, 255);
-    padding: 15px 10px /*简写为两个，为内容上下留出15px垂直空间，左右留出10px水平空间。 注意：若简写为4个，则按照上右下左的顺时针排列进行控制*/
+    color: rgba(255, 255, 255, 1);
+    padding: 15px 10px; /*简写为两个，为内容上下留出15px垂直空间，左右留出10px水平空间。 注意：若简写为4个，则按照上右下左的顺时针排列进行控制*/
     position: fixed;
     max-width: 600px;
     width: 100%;
@@ -508,14 +508,14 @@ Javascript前端设计需要从后端获取数据，完成主页面的设计以�
 #### **1. 准备工作**
 
 ```javascript
-const API_BASE_URL = 'https://localhost:3000/api'; // 定义后端接口的基础地址，因为我的Express服务器监听localhost:3000,所有的后端接口都是/api/...开头
+const API_BASE_URL = 'http://localhost:3000/api'; // 定义后端接口的基础地址，因为我的Express服务器监听localhost:3000,所有的后端接口都是/api/...开头
 let userLocation = null; // 承载用户位置BD09版本，获取前定义为null
 let userLocationwgs = null; // 承载用户位置的wgs84版本
 let baiduMap = null; // 承载百度地图页面
 let parkingLotsData = []; // 承载从后端获取的停车场数据对象
 
 document.addEventListener('DOMContentLoaded', async () => { // 添加事件监听器，当'DOMContentLoaded‘即DOM树加载完毕时，调用这个异步回调函数。要注意这里的async是声明内部可以使用await，因此它本身并未直接发起异步请求。
-    await initUserLocation(); // await作用是发起异步请求，暂停当前函数（回调函数）的后续操作。await操作本身在主线程中执行，不会阻塞主线程。此时initUserLocation()会继续执行并会返回一个Promise，而await下面的代码会被事件循环放入微任务队列中。直到主线程空闲且Promise resolve或reject，被暂停的函数才会重新进入主线程，继续执行。
+    await initUserLocation(); // await作用是暂停当前函数（回调函数）的后续操作,等待异步操作完成。await操作本身在主线程中执行，不会阻塞主线程。此时initUserLocation()会继续执行并会返回一个Promise，而await下面的代码会被事件循环放入微任务队列中。直到主线程空闲且Promise resolve或reject，被暂停的函数才会重新进入主线程，继续执行。
     await loadParkingLots(); // 这里加入异步操作主要目的是暂停该回调函数，等loadParkingLots()获取到停车点数据后再返回，防止地图和筛选按钮提前加载。
     setupFilterButton(); // 加载筛选按钮
     setupMapButton(); // 加载地图按钮
@@ -536,6 +536,7 @@ async function initUserLocation(){
             (position) => {
                 const wgsLng = position.coords.longitude; // 获取WGS84坐标系下的经度
                 const wgsLat = position.coords.latitude; // 获取WGS84坐标下的纬度
+                userLocationwgs = {lat: wgsLat, lng: wgsLng};
                 const convertor = new BMap.Convertor(); // 百度地图提供的WGS84 -> BD09的转换器
                 const pointArr = [new BMap.Point(wgsLng, wgsLat)];//建立需要转换的目标点组，里面是百度地图坐标对象（由于translate的参数限制，即使只有一个点也需要用数组)
                 convertor.translate(pointArr, 1, 5, (data) => {//回调函数
@@ -651,7 +652,7 @@ async function showParkingInfo(name) {
         
         if(vehicles.length === 0) // 没有车辆
         {
-            showMassage('该停车场暂无可用车辆') // 新函数，用来处理特殊情况
+            showMessage('该停车场暂无可用车辆') // 新函数，用来处理特殊情况
             return;
         }
         const lot = parkingLotsData.find(l => l.name === name); // 找到里面同名的停车点数据
@@ -694,7 +695,7 @@ async function showParkingInfo(name) {
 这里加入到html中的元素依旧需要css渲染：
 
 ```css
-.popuoOverlay { /*这里要模拟弹出详细信息时页面变黑的操作*/
+.popupOverlay { /*这里要模拟弹出详细信息时页面变黑的操作*/
     display: flex;
     flex-direction: column;
     position: fixed;
@@ -704,7 +705,7 @@ async function showParkingInfo(name) {
     height: 100%; /*占满整个body*/
     align-items: center;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.5)；
+    background: rgba(0, 0, 0, 0.5);
     z-index: 2000;
     animation: fadeIn 0.3s ease; /*添加淡入的动画效果，0.3s内平滑过渡*/
 }
@@ -742,13 +743,13 @@ async function showParkingInfo(name) {
 .popup h3 {
     margin-top: 0;
     margin-bottom: 15px;
-    color: rgb(198, 26, 26)
+    color: rgb(198, 26, 26);
     font-size: 1.4rem;
 }
 .popup .vehicleCount {
-    color: rgb(2, 95, 255)
+    color: rgb(2, 95, 255);
     font-weight: bold;
-    margin-buttom: 15px;
+    margin-bottom: 15px;
 }
 .popup ul {
     list-style: none; /*去除默认黑点*/
@@ -758,12 +759,12 @@ async function showParkingInfo(name) {
 .popup li {
     margin-bottom: 15px;
     padding: 12px;
-    background: rgb(245, 245, 245)
+    background: rgb(245, 245, 245);
     border-radius: 8px;
-    border-left: 4px solid rgb(2, 95, 255)/*仅在左边缘添加颜色*/
+    border-left: 4px solid rgb(2, 95, 255);/*仅在左边缘添加颜色*/
 }
 .popup li strong {
-    color: rgb(51, 51, 51)
+    color: rgb(51, 51, 51);
     margin-right: 8px;
 }
 
@@ -825,7 +826,7 @@ function setupFilterButton() {
             }); // fetch()默认发出get请求，这里要将用户位置传到后端，故要使用POST请求
             const nearbyLots = await response.json();
             renderParkingLots(nearbyLots);//使用相同的渲染方式并更改主界面卡片顺序
-            showNearbyPopup(nearbuLots); //新函数，展示附近停车点弹窗
+            showNearbyPopup(nearbyLots); //新函数，展示附近停车点弹窗
 
             filterBtn.textContent = '重新寻找' // 更改按钮中的字符
             filterBtn.disabled = false; // 设置为false可以点击
@@ -887,11 +888,11 @@ function showNearbyPopup(lots) {
 
 ```javascript
 function setupMapButton() {
-    const showmapBtn = document.getElementById('showMapBtn');
+    const showMapBtn = document.getElementById('showMap');
     const mapContainer = document.getElementById('mapContainer');
-    const closeMapBtn = document.getElementById('clsoseMapBtn');
+    const closeMapBtn = document.getElementById('closeMapBtn');
     
-    showmapBtn.addEventListener('click', () => {
+    showMapBtn.addEventListener('click', () => {
         showMap();
     });
     closeMapBtn.addEventListener('click', () => {
@@ -918,7 +919,7 @@ function showMap() {
 #### **10. 初始化百度地图**
 
 ```javascript
-function initBaidumap(centerLocation) { // 这里用centerLocation，是因为点开百度地图，百度地图需要固定一个中心点并进行缩放
+function initBaiduMap(centerLocation) { // 这里用centerLocation，是因为点开百度地图，百度地图需要固定一个中心点并进行缩放
     if(!baiduMap) { //若空，则要通过百度地图官方的BMap库进行初始化创建。BMap是百度地图Javascript SDK提供的全局命名空间对象，所有百度地图的功能都在里面
         baiduMap = new BMap.Map('baiduMap'); // 创建一个地图对象，.Map()接收一个id参数，并将该对象绑定在持有这个ID的<div>容器
         baiduMap.enableScrollWheelZoom(true); // 启用鼠标滚轮缩放功能
@@ -982,7 +983,7 @@ async function renderParkingLotsOnMap() {
         addInfoWindow(lotMarker, lotInfo);//新函数，添加停车点的详细信息窗口，并提供点击交互，跟用户位置的窗口和交互一致，封装成函数提高可读性
 
         //设置多边形停车区域
-        const polygonPoints = lot.polygon.map(p => new BMap.Point(p,lng, p.lat)); //获取每个停车点coordinats数组
+        const polygonPoints = lot.polygon.map(p => new BMap.Point(p.lng, p.lat)); //获取每个停车点coordinats数组
         const polygon = new BMap.Polygon(polygonPoints, {
             strokeColor: "blue", //设置多边形边界线蔚蓝色
             strokeWeight: 2, // 设置多边形边界宽度为2px
@@ -993,8 +994,8 @@ async function renderParkingLotsOnMap() {
         baiduMap.addOverlay(polygon);
         addInfoWindow(polygon, lotInfo);//点击停车场区域也会弹出详细信息
 
-        const res = await fetch(`${API_BASE_URL}/pariking-lots/${encodeURIComponent(lot.name)}/vehicles`);
-        const vehicles = res.json();
+        const res = await fetch(`${API_BASE_URL}/parking-lots/${encodeURIComponent(lot.name)}/vehicles`);
+        const vehicles = await res.json();
         vehicles.forEach(v => { //遍历车辆数据
             const vehiclePoint = new BMap.Point(v.lng, v.lat);//创建每辆车的坐标点
             const vehicleMarker = new BMap.Marker(vehiclePoint, { //设置自定义图标
@@ -1006,7 +1007,7 @@ async function renderParkingLotsOnMap() {
             });
             baiduMap.addOverlay(vehicleMarker);
 
-            const info = `<strong>车辆编号：</strong>${v.id}<br>电量：${v.battary}<br>距离停车点：${v.distance}`;
+            const info = `<strong>车辆编号：</strong>${v.id}<br>电量：${v.battery}<br>距离停车点：${v.distance}`;
             addInfoWindow(vehicleMarker, info);
         });
     }
@@ -1016,7 +1017,7 @@ async function renderParkingLotsOnMap() {
 #### **12. 添加信息窗口**
 
 ```javascript
-function addInforWindow(target, content) { // target是要添加信息窗口的对象，content时信息窗口内容
+function addInforWindow(target, content) { // target是要添加信息窗口的对象，content是信息窗口内容
     const infoWindow = new BMap.InfoWindow(content, { //第二个参数设置信息窗口属性
         width: 200,
         height: 120,
@@ -1033,7 +1034,7 @@ function addInforWindow(target, content) { // target是要添加信息窗口的�
 
 ```javascript
 async function navigateToParking(name, lat, lng) {
-    if(!useLocation) {
+    if(!userLocation) {
         showError('无法获取您的位置，请先允许定位权限');
         return;
     }
@@ -1045,12 +1046,12 @@ async function navigateToParking(name, lat, lng) {
     mapContainer.style.display = 'flex'; // 显示地图
 
     if(!baiduMap){ // 如果地图还没初始化，就先初始化然后显示
-        initBaiduMap(useLocation);
+        initBaiduMap(userLocation);
     }
 
     const start = new BMap.Point(userLocation.lng, userLocation.lat);
     const end = new BMap.Point(lng, lat); // 要去的停车点的经纬度
-    baiduMap.clearOverlay(); // 照例清除所有标记
+    baiduMap.clearOverlays(); // 照例清除所有标记
 
      const lot = parkingLotsData.find(l => l.name === name);
      if(lot)
@@ -1165,9 +1166,9 @@ function showMessage(message) {
     }
 
     .contentContainer {
-        margin: 100px auto 80px auto
+        margin: 100px auto 80px auto;
         gap: 30px;
-        padding: 0 0.5rem
+        padding: 0 0.5rem;
     }
 
     .parkingLot {
